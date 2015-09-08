@@ -1,0 +1,16 @@
+[
+{
+  "modid": "NEITest",
+  "name": "NEI Test",
+  "description": ":3",
+  "version": "0.0.1",
+  "mcversion": "1.8",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Meow J"],
+  "credits": "Meow Innovation",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
