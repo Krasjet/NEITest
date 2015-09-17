@@ -37,7 +37,7 @@ minecraft {
 
     mappings = "snapshot_20150715"
 	
-	replaceIn "Ordo.java"
+	replaceIn "NEITest.java"
         replace "@VERSION@", config.mod_version
 }
 
