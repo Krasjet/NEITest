@@ -13,6 +13,11 @@ package com.meowinnovation.neitest.client.gui;
 import com.meowinnovation.neitest.common.block.container.ContainerMeowMachine;
 import com.meowinnovation.neitest.common.block.tile.TileMeowMachine;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Created by Meow J on 8/30/2015.
@@ -22,12 +27,21 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 public class GuiMeowMachine extends GuiContainer {
     private TileMeowMachine tileEntity;
 
-    public GuiMeowMachine(TileMeowMachine tileEntity) {
-        super(new ContainerMeowMachine(tileEntity));
+    public GuiMeowMachine(InventoryPlayer inventory, TileMeowMachine tileEntity) {
+        super(new ContainerMeowMachine(inventory, tileEntity));
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-
+    public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        mc.getTextureManager().bindTexture(new ResourceLocation("neitest:textures/gui/guiMeowMachine.png"));
+        int x = (width - xSize) / 2;
+        int y = (height - ySize) / 2;
+        this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
     }
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+    {
+        fontRendererObj.drawString(StatCollector.translateToLocal("tile.meow_machine.name"), 8, 6, 4210752);
+    }
+
 }

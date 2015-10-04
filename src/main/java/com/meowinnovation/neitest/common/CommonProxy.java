@@ -10,6 +10,7 @@
 
 package com.meowinnovation.neitest.common;
 
+import com.meowinnovation.neitest.NEITest;
 import com.meowinnovation.neitest.common.block.NEITestBlocks;
 import com.meowinnovation.neitest.common.block.container.ContainerMeowMachine;
 import com.meowinnovation.neitest.common.block.tile.TileMeowMachine;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -36,6 +38,7 @@ public class CommonProxy implements IGuiHandler {
     }
 
     public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(NEITest.instance, NEITest.proxy);
         GameRegistry.registerTileEntity(TileMeowMachine.class, "TileMeowMachine");
     }
 
@@ -47,7 +50,7 @@ public class CommonProxy implements IGuiHandler {
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         if (tileEntity instanceof TileMeowMachine)
-            return new ContainerMeowMachine((TileMeowMachine) tileEntity);
+            return new ContainerMeowMachine(player.inventory, (TileMeowMachine) tileEntity);
         return null;
     }
 

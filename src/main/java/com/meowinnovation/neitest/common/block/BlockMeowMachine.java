@@ -10,8 +10,8 @@
 
 package com.meowinnovation.neitest.common.block;
 
+import com.meowinnovation.neitest.NEITest;
 import com.meowinnovation.neitest.common.block.tile.TileMeowMachine;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -20,6 +20,7 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -63,6 +64,14 @@ public class BlockMeowMachine extends BlockContainer {
     @Override
     public int getMetaFromState(IBlockState state) {
         return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
+    }
+
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (player.isSneaking())
+            return false;
+
+        player.openGui(NEITest.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
+        return true;
     }
 
     @Override

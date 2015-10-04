@@ -10,24 +10,17 @@
 
 package com.meowinnovation.neitest.client;
 
-import com.meowinnovation.neitest.NEITest;
 import com.meowinnovation.neitest.client.gui.GuiMeowMachine;
 import com.meowinnovation.neitest.common.CommonProxy;
 import com.meowinnovation.neitest.common.block.NEITestBlocks;
 import com.meowinnovation.neitest.common.block.tile.TileMeowMachine;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Created by Meow J on 7/26/2015.
@@ -58,7 +51,7 @@ public class ClientProxy extends CommonProxy {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 
         if (tileEntity instanceof TileMeowMachine)
-            return new GuiMeowMachine((TileMeowMachine) tileEntity);
+            return new GuiMeowMachine(player.inventory, (TileMeowMachine) tileEntity);
 
         return null;
     }
