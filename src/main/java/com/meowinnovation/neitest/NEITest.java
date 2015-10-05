@@ -23,10 +23,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  *
  * @author Meow J
  */
-@Mod(modid = NEITest.MODID, name = NEITest.NAME, version = "@VERSION@")
+@Mod(modid = NEITest.MODID, name = NEITest.NAME, version = NEITest.VERSION)
 public class NEITest {
     public static final String MODID = "NEITest";
     public static final String NAME = "NEI Test";
+    public static final String VERSION = "@VERSION@";
 
     @Mod.Instance(NEITest.MODID)
     public static NEITest instance;

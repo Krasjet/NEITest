@@ -54,6 +54,21 @@ public class RecipeMeowMachine {
         return input;
     }
 
+    /**
+     * @return The input stack in ItemStack or ItemStack List form
+     */
+    public Object getCraftingInput() {
+        if (input instanceof ItemStack)
+            return input;
+        else if (input instanceof Block)
+            return new ItemStack((Block) input);
+        else if (input instanceof Item)
+            return new ItemStack((Item) input);
+        else if (input instanceof String)
+            return OreDictionary.getOres(((String) input));
+        else throw new IllegalArgumentException("Invalid input");
+    }
+
     public boolean matches(IInventory inventory) {
         if (inventory.getStackInSlot(0).isItemEqual(new ItemStack(Items.fishing_rod))) {
             if (input instanceof ItemStack)

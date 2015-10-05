@@ -16,6 +16,7 @@ import com.meowinnovation.neitest.common.block.NEITestBlocks;
 import com.meowinnovation.neitest.common.block.container.ContainerMeowMachine;
 import com.meowinnovation.neitest.common.block.tile.TileMeowMachine;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -44,6 +45,7 @@ public class CommonProxy implements IGuiHandler {
         NetworkRegistry.INSTANCE.registerGuiHandler(NEITest.instance, NEITest.proxy);
         GameRegistry.registerTileEntity(TileMeowMachine.class, "TileMeowMachine");
         Recipes.registerMeowMachineRecipe(Items.beef, new ItemStack(Items.fish, 2));
+        Recipes.registerMeowMachineRecipe(Blocks.dirt, new ItemStack(Items.fish, 1, 1));
     }
 
     public void postInit(FMLPostInitializationEvent event) {
