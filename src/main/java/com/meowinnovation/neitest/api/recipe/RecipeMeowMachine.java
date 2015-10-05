@@ -32,7 +32,7 @@ public class RecipeMeowMachine {
      * The constructor of RecipeMeowMachine
      *
      * @param input  The input of the recipe. Supported Type: String, ItemStack, Item, Block
-     * @param output the output of the recipe.
+     * @param output The output of the recipe.
      */
     public RecipeMeowMachine(Object input, ItemStack output) {
         this.output = output;

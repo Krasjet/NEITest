@@ -10,6 +10,8 @@
 
 package com.meowinnovation.neitest.common.block.tile;
 
+import com.meowinnovation.neitest.api.recipe.RecipeMeowMachine;
+import com.meowinnovation.neitest.api.recipe.Recipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -18,6 +20,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
@@ -29,8 +32,32 @@ import net.minecraftforge.common.util.Constants;
  *
  * @author Meow J
  */
-public class TileMeowMachine extends TileEntity implements ISidedInventory {
+public class TileMeowMachine extends TileEntity implements ISidedInventory, IUpdatePlayerListBox {
     private ItemStack[] inventory = new ItemStack[3];
+
+    @Override
+    public void update() {
+        if (worldObj.isRemote || inventory[0] == null || inventory[1] == null)
+            return;
+        for (RecipeMeowMachine recipe : Recipes.meowMachineRecipes) {
+            if (recipe.matches(this)) {
+                ItemStack result = recipe.getOutput().copy();
+                if (inventory[2] == null) {
+                    inventory[2] = result;
+                    inventory[0] = null;
+                    if (--inventory[1].stackSize < 1)
+                        inventory[1] = null;
+                    worldObj.playSoundEffect(pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, "mob.cat.meow", 1.0F, 1.0F);
+                } else if (inventory[2].isItemEqual(result) && inventory[2].stackSize + result.stackSize <= inventory[2].getMaxStackSize()) {
+                    inventory[2].stackSize += result.stackSize;
+                    inventory[0] = null;
+                    if (--inventory[1].stackSize < 1)
+                        inventory[1] = null;
+                    worldObj.playSoundEffect(pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, "mob.cat.meow", 1.0F, 1.0F);
+                } else return;
+            }
+        }
+    }
 
     @Override
     public void writeToNBT(NBTTagCompound compound) {
@@ -189,4 +216,5 @@ public class TileMeowMachine extends TileEntity implements ISidedInventory {
         super.onDataPacket(net, packet);
         readFromNBT(packet.getNbtCompound());
     }
+
 }

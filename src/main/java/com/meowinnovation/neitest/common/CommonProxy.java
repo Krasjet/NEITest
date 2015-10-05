@@ -11,10 +11,13 @@
 package com.meowinnovation.neitest.common;
 
 import com.meowinnovation.neitest.NEITest;
+import com.meowinnovation.neitest.api.recipe.Recipes;
 import com.meowinnovation.neitest.common.block.NEITestBlocks;
 import com.meowinnovation.neitest.common.block.container.ContainerMeowMachine;
 import com.meowinnovation.neitest.common.block.tile.TileMeowMachine;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -40,6 +43,7 @@ public class CommonProxy implements IGuiHandler {
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(NEITest.instance, NEITest.proxy);
         GameRegistry.registerTileEntity(TileMeowMachine.class, "TileMeowMachine");
+        Recipes.registerMeowMachineRecipe(Items.beef, new ItemStack(Items.fish, 2));
     }
 
     public void postInit(FMLPostInitializationEvent event) {

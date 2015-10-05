@@ -76,7 +76,7 @@ public class ContainerMeowMachine extends Container {
             if (index < tileEntity.getSizeInventory()) {
                 if (!this.mergeItemStack(stackInSlot, tileEntity.getSizeInventory(), this.inventorySlots.size(), true))
                     return null;
-            } else if (!this.mergeItemStack(stackInSlot, 0, tileEntity.getSizeInventory() - 1, false))
+            } else if (!this.mergeItemStack(stackInSlot, 0, tileEntity.getSizeInventory(), false))
                 return null;
 
 
