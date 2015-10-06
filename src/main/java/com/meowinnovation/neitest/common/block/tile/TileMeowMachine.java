@@ -40,8 +40,6 @@ public class TileMeowMachine extends TileEntity implements ISidedInventory, IUpd
         if (worldObj.isRemote)
             return;
         for (RecipeMeowMachine recipe : Recipes.meowMachineRecipes) {
-            if (inventory[0] == null || inventory[1] == null)
-                return;
             if (recipe.matches(this)) {
                 ItemStack result = recipe.getOutput().copy();
                 if (inventory[2] == null) {
@@ -58,6 +56,8 @@ public class TileMeowMachine extends TileEntity implements ISidedInventory, IUpd
                     worldObj.playSoundEffect(pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, "mob.cat.meow", 1.0F, 1.0F);
                 } else return;
             }
+            if (inventory[0] == null || inventory[1] == null)
+                return;
         }
     }
 
