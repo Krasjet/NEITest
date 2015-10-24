@@ -39,6 +39,8 @@ public class TileMeowMachine extends TileEntity implements ISidedInventory, IUpd
     public void update() {
         if (worldObj.isRemote)
             return;
+        if (inventory[0] == null || inventory[1] == null)
+            return;
         for (RecipeMeowMachine recipe : Recipes.meowMachineRecipes) {
             if (recipe.matches(this)) {
                 ItemStack result = recipe.getOutput().copy();
