@@ -46,6 +46,7 @@ public class CommonProxy implements IGuiHandler {
         GameRegistry.registerTileEntity(TileMeowMachine.class, "TileMeowMachine");
         Recipes.registerMeowMachineRecipe(Items.beef, new ItemStack(Items.fish, 2));
         Recipes.registerMeowMachineRecipe(Blocks.dirt, new ItemStack(Items.fish, 1, 1));
+        Recipes.registerMeowMachineRecipe(Items.cooked_beef, new ItemStack(Items.cooked_fish, 2));
     }
 
     public void postInit(FMLPostInitializationEvent event) {

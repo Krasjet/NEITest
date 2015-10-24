@@ -70,9 +70,8 @@ public class RecipeHandlerMeowMachine extends TemplateRecipeHandler {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (RecipeMeowMachine recipe : Recipes.meowMachineRecipes) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getOutput(), result)) {
+            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getOutput(), result))
                 this.arecipes.add(new CachedMeowMachineRecipe(recipe));
-            }
         }
     }
 
@@ -105,7 +104,7 @@ public class RecipeHandlerMeowMachine extends TemplateRecipeHandler {
             List<PositionedStack> ingredients = new ArrayList<PositionedStack>();
             ingredients.add(input);
             ingredients.add(fishingRod);
-            return ingredients;
+            return getCycledIngredients(cycleticks / 20, ingredients);
         }
 
         @Override
