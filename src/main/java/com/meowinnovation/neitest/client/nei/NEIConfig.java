@@ -24,7 +24,7 @@ public class NEIConfig implements IConfigureNEI {
     @Override
     public void loadConfig() {
         API.registerRecipeHandler(new RecipeHandlerMeowMachine());
-        API.registerRecipeHandler(new RecipeHandlerMeowMachine());
+        API.registerUsageHandler(new RecipeHandlerMeowMachine());
         API.setGuiOffset(GuiMeowMachine.class, 0, 0);
     }
 
